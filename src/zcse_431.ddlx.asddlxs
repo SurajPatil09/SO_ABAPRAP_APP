@@ -1,0 +1,35 @@
+@Metadata.layer: #PARTNER
+@UI: {
+  headerInfo: { typeName: 'Quanity & Warehouse',
+                typeNamePlural: 'Quanity & Warehouses',
+                title: { type: #STANDARD, label: 'Quanity & Warehouse', value: 'ExtraId' } },
+  presentationVariant: [{ sortOrder: [{ by: 'ExtraId', direction:  #ASC }] }] }
+annotate view ZCSE_431
+    with 
+{
+
+   @UI.facet: [ { id:              'Result',
+                 purpose:         #STANDARD,
+                 type: #IDENTIFICATION_REFERENCE,
+                 label:           'Quality',
+                 position:        10 }]
+           
+ @UI: { identification: [ { position: 1, label: 'Sale Order Number'  } ] }  
+SoId;
+ @UI: { identification: [ { position: 3, label: 'Sale_Item Number'  } ] }
+ExtraId;
+ @UI: { lineItem: [{ position: 20, label: 'Quantity' }],
+  identification: [{ position: 20, label: 'Quantity' }]}
+Qty;
+ @UI: { lineItem: [{ position: 30, label: 'Warehouse Number' }],
+  identification: [{ position: 30, label: 'Warehouse Number' }]}
+@Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_WHDB', element: 'WarehouseId'} }]
+WarehouseId;
+ @UI: { lineItem: [{ position: 40, label: 'Warehouse Address' }],
+  identification: [{ position: 40, label: 'Warehouse Address' }]}
+@Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_WHDB', element: 'WarehouseAddress'} }]
+WarehouseAddress;
+ @UI: { lineItem: [{ position: 50, label: 'Comments' }],
+  identification: [{ position: 50, label: 'Comments' }]}
+Comments;
+}

@@ -1,0 +1,70 @@
+@Metadata.layer: #PARTNER
+@UI: {
+  headerInfo: { typeName: 'Sale Order',
+                typeNamePlural: 'Sale Orders',
+                title: { type: #STANDARD, label: 'Sale Order', value: 'SoId' } },
+  presentationVariant: [{ sortOrder: [{ by: 'SoId', direction:  #ASC }] }] }
+annotate view ZCSH_431
+    with 
+{
+   @UI.facet: [ { id:              'Student',
+                 purpose:         #STANDARD,
+                 type:            #IDENTIFICATION_REFERENCE,
+                 label:           'General Inforamtion',
+                 position:        10 },
+                 
+                 { id:              'Academic',
+                 purpose:         #STANDARD,
+                 type:            #LINEITEM_REFERENCE,
+                 label:           'Item Information',
+                 position:        20 ,
+                 targetElement: '_ITEM'},
+                 
+                 { id:              'Result',
+                 purpose:         #STANDARD,
+                 type:            #LINEITEM_REFERENCE,
+                 label:           'Quantity and Warehouse Information',
+                 position:        30 ,
+                 targetElement: '_EXTRA'} ]
+    
+   @UI: {  lineItem:       [ { position: 10 } ],
+         identification: [ { position: 10} ],
+          selectionField: [ { position: 20 } ]        
+           }
+    @EndUserText.label: 'Sales Order Number'
+    @Search.defaultSearchElement:true
+    
+    @Consumption.valueHelpDefinition: [{ entity: { element: 'SoId' , name: 'ZI_SO_VH'},
+                                        additionalBinding: [{ localElement: 'SoId' , element: 'SoId' }] }]                 
+    SoId;
+     @UI: {  lineItem:       [ { position: 20 } ],
+         identification: [ { position: 20 } ],
+          selectionField: [ { position: 30 } ]
+           }
+    @EndUserText.label: 'Customer Number'
+    @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_CTDB', element: 'CustomerId'}  }]
+    CustomerId;
+     @UI: {  lineItem:       [ { position: 30 } ],
+               identification: [ { position: 30 } ]
+           }
+    @EndUserText.label: 'Customer Description'
+     @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_CTDB', element: 'CustomerDesc'}  }]
+    CustomerDesc;
+   @UI: {  lineItem:       [ { position: 40 } ],
+         identification: [ { position: 40 } ]
+           }
+    @EndUserText.label: 'Sales order Date'
+    SoDate;
+    @UI: { lineItem:       [ { position: 50 } ],
+          selectionField: [ { position: 10 }],
+          identification: [ { position: 50 , importance: #HIGH },
+                            { type: #FOR_ACTION, dataAction: 'Approve', label: 'Approve' },
+                            { type: #FOR_ACTION, dataAction: 'Reject', label: 'Reject' }
+                          ] } 
+           
+    @EndUserText.label: 'Order Status'
+    @Consumption.valueHelpDefinition: [{ entity: { element: 'Text' , name: 'ZI_SO_STATUS_VH'} }]
+    Salestatus;
+ 
+    
+}

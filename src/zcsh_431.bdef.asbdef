@@ -1,0 +1,31 @@
+projection;
+//strict ( 2 );
+
+define behavior for ZCSH_431 alias sale
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Approve;
+  use action Reject;
+
+  use association _EXTRA { create; }
+  use association _ITEM  { create; }
+}
+
+define behavior for ZCSE_431 alias extra
+{
+  use update;
+  use delete;
+
+  use association _SALE;
+}
+
+define behavior for ZCSI_431 alias item
+{
+  use update;
+  use delete;
+
+  use association _SALE;
+}

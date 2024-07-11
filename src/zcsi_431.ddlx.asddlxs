@@ -1,0 +1,37 @@
+@Metadata.layer: #PARTNER
+@UI: {
+  headerInfo: { typeName: 'Item',
+                typeNamePlural: 'Items',
+                title: { type: #STANDARD, label: 'Item', value: 'ItemId' } },
+  presentationVariant: [{ sortOrder: [{ by: 'ItemId', direction:  #ASC }] }] }
+annotate view ZCSI_431
+    with 
+{
+    @UI.facet: [
+                 { id:              'Academic',
+                 purpose:         #STANDARD,
+                 type:            #IDENTIFICATION_REFERENCE,
+                 label:           'Item Information',
+                 position:        20 
+                 }]
+  
+
+  @UI: { lineItem: [{ position: 20, label: 'Item Number' }],
+  identification: [{ position: 20, label: 'Item Number' }]}
+    ItemId;
+    @UI: { lineItem: [{ position: 30, label: 'Material Number' }],
+  identification: [{ position: 30, label: 'Material Number' }]}
+  @Consumption.valueHelpDefinition: [{ entity: { element: 'MaterialNo' , name: 'ZI_MODB'} }]
+    MaterialNo;
+    @UI: { lineItem: [{ position: 40, label: 'Material  Description' }],
+  identification: [{ position: 40, label: 'Material  Description' }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_MODB', element: 'MaterialDesc'} }]
+    MaterialDesc;
+    @UI: { lineItem: [{ position: 60, label: 'Currency' }],
+  identification: [{ position: 60, label: 'Currency' }]}
+   @Consumption.valueHelpDefinition: [{ entity: { name: 'I_Currency', element: 'Currency'} }]
+    CurrencyCode;
+    @UI: { lineItem: [{ position: 50, label: ' Amount' }],
+  identification: [{ position:50, label: ' Amount' }]}
+    Amount;
+}

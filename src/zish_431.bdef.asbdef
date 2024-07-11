@@ -1,0 +1,81 @@
+unmanaged implementation in class zbp_ish_431 unique;
+//strict ( 2 );
+
+define behavior for ZISH_431 alias sale
+//late numbering
+lock master
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+  field ( readonly ) SoId;
+  association _EXTRA { create; }
+  association _ITEM { create; }
+
+ action ( features : instance ) Approve result [1] $self;
+ action ( features : instance ) Reject result [1] $self;
+
+ mapping for zsh_431
+{
+SoId = so_id;
+SoDate = so_date;
+CustomerId = customer_id;
+CustomerDesc = customer_desc;
+Salestatus = salestatus;
+LocalLastChangedAt  = local_last_changed_at ;
+}
+}
+
+define behavior for ZISE_431 alias extra
+//late numbering
+lock dependent by _SALE
+authorization dependent by _SALE
+etag master Lastchange
+{
+  update;
+  delete;
+  field ( readonly : update) SoId;
+  field (mandatory : create)ExtraId;
+  association _SALE;
+
+  mapping for zse_431
+  {
+  SoId = so_id;
+  ExtraId = extra_id;
+  WarehouseId = warehouse_id;
+  WarehouseAddress = warehouse_address;
+  Qty = qty;
+  Unit = unit;
+  Comments =  comments;
+  Lastchange = lastchange;
+}
+
+}
+
+define behavior for ZISI_431 alias item
+//late numbering
+lock dependent by _SALE
+authorization dependent by _SALE
+etag master Lastchange
+{
+  update;
+  delete;
+  field ( readonly: update ) SoId;
+  field (mandatory : create)ItemId;
+  association _SALE;
+
+
+   mapping for zsi_431
+  {
+  SoId = so_id;
+  ItemId =  item_id;
+  MaterialNo = material_no;
+  MaterialDesc = material_desc;
+  Amount = amount;
+  CurrencyCode = currency_code;
+  Lastchange = lastchange;
+  }
+
+}
